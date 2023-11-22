@@ -8,7 +8,7 @@
 
 {% block body %}
     <div class="example-wrapper">
-        {{ form_start(form) }}
+        {{ form_start(form, {'attr': {'novalidate' : 'novalidate'}}) }}
         <div>{{ form_errors(form) }}</div>
 
         <div>
@@ -25,7 +25,6 @@
         {{ form_end(form) }}
 
         <p>
-            <a href="{{ path('app_micro_post') }}">Back to the posts list</a> |
             <a href="{{ path('app_micro_post_show', {id: post.id}) }}">Back to the post</a>
         </p>
     </div>
