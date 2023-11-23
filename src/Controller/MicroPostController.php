@@ -48,7 +48,6 @@ class MicroPostController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
 
-            $post->setCreated(new \DateTime());
             $post->setAuthor($this->getUser());
 
             $entityManager->persist($post);

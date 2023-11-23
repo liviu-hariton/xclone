@@ -54,6 +54,8 @@ class MicroPost
     {
         $this->comments = new ArrayCollection();
         $this->liked_by = new ArrayCollection();
+
+        $this->created = new \DateTime;
     }
 
     public function getId(): ?int
