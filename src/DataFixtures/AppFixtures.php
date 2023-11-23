@@ -64,16 +64,6 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        /*foreach($this->dummyData() as $data) {
-            $microPost = new MicroPost();
-
-            $microPost->setTitle($data['title']);
-            $microPost->setText($data['text']);
-            $microPost->setCreated(new \DateTime());
-
-            $manager->persist($microPost);
-        }*/
-
         foreach($this->dummyUsers() as $udata) {
             $user = new User();
 
@@ -83,6 +73,21 @@ class AppFixtures extends Fixture
             );
 
             $manager->persist($user);
+        }
+
+        $manager->flush();
+
+        foreach($this->dummyData() as $data) {
+            $microPost = new MicroPost();
+
+            $microPost->setTitle($data['title']);
+            $microPost->setText($data['text']);
+
+            $microPost->setAuthor($manager->getRepository(User::class)->find(rand(1, 4)));
+
+            $microPost->setCreated(new \DateTime());
+
+            $manager->persist($microPost);
         }
 
         $manager->flush();

@@ -35,6 +35,11 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_EDITOR] # ROLE_EDITOR is inherited by ROLE_ADMIN (the ADMIN can do everything the EDITOR can do
+        ROLE_EDITOR: [ROLE_COMMENTATOR] # ROLE_COMMENTATOR is inherited by ROLE_EDITOR (the EDITOR can do everything the COMMENTATOR can do)
+        ROLE_COMMENTATOR: [ROLE_USER] # ROLE_USER is inherited by ROLE_COMMENTATOR (the COMMENTATOR can do everything the USER can do)
+
 when@test:
     security:
         password_hashers:
