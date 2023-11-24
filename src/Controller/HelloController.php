@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
+    /*#[Route('/', name: 'app_index')]*/
     public function index(
         UserProfileRepository $profiles,
         MicroPostRepository $posts,
