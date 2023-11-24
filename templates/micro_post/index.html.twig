@@ -7,13 +7,6 @@
 {% endblock %}
 
 {% block body %}
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-    {% if posts|length > 0 %}
-        {% for post in posts %}
-            {{ include('micro_post/_post.html.twig', { post: post}) }}
-        {% endfor %}
-    {% else %}
-        <p>No posts found.</p>
-    {% endif %}
-</div>
+        {{ include('micro_post/_post_tabs.html.twig') }}
+        {{ include('micro_post/_post_list.html.twig', { posts: posts}) }}
 {% endblock %}
