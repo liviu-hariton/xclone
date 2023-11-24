@@ -30,8 +30,11 @@ class MicroPostVoter extends Voter
      * @param TokenInterface $token
      * @return bool
      */
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
-    {
+    protected function voteOnAttribute(
+        string $attribute,
+               $subject,
+        TokenInterface $token
+    ): bool {
         /**
          * @var User $user
          */
@@ -53,11 +56,13 @@ class MicroPostVoter extends Voter
             // Either the user is the author of the post or the user is an editor
             case MicroPost::EDIT:
                 return $is_auth && ($subject->getAuthor()->getId() === $user->getId() || $this->security->isGranted('ROLE_EDITOR'));
-                break;
-
+            // If the post is not extra private, grant access
             case MicroPost::VIEW:
-                return true;
-                break;
+                if (!$subject->isExtraPrivacy()) {
+                    return true;
+                }
+
+                return $is_auth && ($subject->getAuthor()->getId() === $user->getId() || $subject->getAuthor()->getFollows()->contains($user));
         }
 
         return false;
